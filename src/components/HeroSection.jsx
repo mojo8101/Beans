@@ -83,3 +83,189 @@
 //   - Floating price badge (circular badge showing "FROM $14.99 per bag")
 
 /* --- YOUR COMPONENT CODE GOES HERE --- */
+
+
+// Imports --> named, default
+
+// eslint-disable-next-line no-unused-vars
+import {motion, useScroll, useTransform} from "framer-motion";
+
+// Default  
+import heroBeans from "../assets/hero-beans.png";
+// Import  other components
+import Button from "./ui/Button";
+import Badge from "./ui/Badge";
+
+// Words will appear 0.12 seconds after each other 
+// State
+const textVariants = {
+    hidden: {},
+    visible: {transition: {staggerChildren: 0.12}}
+};
+
+
+
+// State
+const wordVariant = {
+    hidden: {opacity: 0, y: 60, rotateX: -40},
+    visible: {
+        opacity: 1,
+        y: 0,
+        rotateX: 0,
+        transition: {duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94]}
+    }
+};
+
+
+
+
+export default function HeroSection(){
+    // Still can write JS
+
+    // Create a live value to track how far the page has scrolled
+    const {scrollY} = useScroll();
+
+    // Change values to our image as the user scrolls
+
+    const imgScale = useTransform(scrollY, [0,600], [1.35, 0.9])
+    const imgOpacity = useTransform(scrollY, [0,500], [1, 0])
+    const imgY = useTransform(scrollY, [0,600], [0, 100])
+
+
+
+    return (
+
+        // <> </> - fragment - groups elements without an extra wrapper tag
+
+        <>
+          {/* This is a comment node */}
+          <div id="home" className="hero-text-column">
+            <motion.div
+                initial={{opacity: 0, y: 20}}
+                animate={{opacity: 1, y: 0}}
+                transition={{duration: 0.5, delay: 0.1}}
+            >
+                <Badge variant="outline" className="mb-5">
+                    Premium Coffee Beans — Roasted Fresh Daily
+                </Badge>
+            </motion.div>
+
+
+            <motion.h1
+            className="h1-stack"
+            style={{margin: 0, perspective: "600px"}}
+                variants={textVariants}
+                initial="hidden"
+                animate="visible"
+            >
+                <motion.span variants={wordVariant} style={{display: "inline-block"}}>
+                YOUR PLACE
+                </motion.span>
+                <br/>
+                <motion.span
+                variants={wordVariant}
+                className="muted"
+                style={{display: "inline-block"}}
+                >
+                FOR COFFEE
+                </motion.span>
+                <br/>
+                <motion.span variants={wordVariant} style={{display: "inline-block"}}>
+                    BREWING
+                </motion.span>
+                </motion.h1>
+
+            {/* Paragraph 
+            - Delayed so it lands after the headline */}
+            <motion.p
+               className="lead"
+               style={{marginTop: 18}}
+               initial={{opacity: 0, y: 20}}
+               animate={{opacity: 1, y: 0}}
+               transition={{duration: 0.5, delay: 0.6}}
+               >
+                Farm-to-cup single-origin beans from Ethiopia, Colombia & beyond. Freshly
+                roasted in small batches and shipped to your door within 48hrs.
+                </motion.p>          
+
+                {/* Buttons - each scrolls smoothly to a section by id. ?. avoids an error if
+                that section isn't on the page */}
+
+                <motion.div
+                className="hero-actions"
+                initial={{opacity: 0, y: 20}}
+                animate={{opacity: 1, y: 0}}
+                transition={{duration: 0.5, delay: 0.8}}
+                >
+                    <Button
+                        variant="accent"
+                        size="lg"
+                        className="shadow-lg"
+                        onClick={()=>
+                            document.getElementById("shop")?.scrollIntoView({behavior: "smooth"})
+                        }
+                    >
+                        SHOP COFFEE ☕
+                        </Button>
+                    <Button
+                        variant="outline"
+                        size="lg"
+                        onClick={()=>
+                            document.getElementById("about")?.scrollIntoView({behavior: "smooth"})
+                        }
+                    >
+                        OUR STORY
+                    </Button>
+                </motion.div>
+
+                {/* Trust indicators - appears last, after the buttons */}
+                <motion.div
+                className="hero-trust"
+                initial={{opacity: 0, y: 20}}
+                animate={{opacity: 1}}
+                transition={{duration: 0.6, delay: 1.1}}
+                >
+                    <span>★★★★★ 4.9/5 from 2,400+ customer</span>
+                    <span className="hero-trust-divider"> </span>
+                    <span>Free Shipping over $50</span>
+                </motion.div>
+          </div>
+
+        <div className="herp-art-container">
+            {/* initial/animate - the one-time entrance on the page load
+            style - shrink, fade, drift
+             */}
+
+             <motion.img
+             className="hero-art"
+             src={heroBeans}
+             alt="Premium Coffee Beans"
+             style={{
+                scale: imgScale,
+                opacity: imgOpacity,
+                y: imgY
+             }}
+                initial={{opacity: 0, scale: 0.8, x: 60}}
+                animate={{opacity: 1, scale: 1.35, x: 0}}
+                transition={{duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94]}}
+                />
+
+                <motion.div
+                className="hero-floating-badge"
+                initial={{opacity: 0, scale: 0.8}}
+                animate={{opacity: 1, scale: 1}}
+                transition={{
+                    duration: 1.2,
+                    delay: 0.3,
+                    type: "spring",
+                stiffness: 200
+                }}
+                >
+                    <span className="hero-floating-badge-label">FROM</span>
+                    <span className="hero-floating-badge-price">$14.99</span>
+                    <span className="hero-floating-badge-label">per bag</span>
+                </motion.div>
+        </div>
+        </>
+    );
+};

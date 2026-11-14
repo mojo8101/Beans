@@ -55,6 +55,7 @@
 
 /* --- YOUR COMPONENT CODE GOES HERE --- */
 import HeroSection from "./components/HeroSection";
+import FooterSection from "./components/FooterSection";
 
 
 
@@ -71,7 +72,7 @@ return (
             </div>
         </section>
 
-
+        <FooterSection />
 
     </div>
 

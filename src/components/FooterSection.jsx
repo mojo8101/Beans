@@ -80,12 +80,12 @@
 
 /* --- YOUR COMPONENT CODE GOES HERE --- */
 
-// useEffect --> runs after render; useRef --> holds a dom reference across renders
+// ⁡⁣⁣⁢useEffect --> runs after render; useRef --> holds a dom reference across renders⁡
 import {useEffect, useRef} from "react"
 import L from "leaflet"
 import "leaflet/dist/leaflet.css"
-import Separator from "./Separator"
-import ScrollReveal from "./ScrollReveal"
+import Separator from "./ui/Separator"
+import ScrollReveal from "./ui/ScrollReveal"
 import logo from "../assets/Beans_logo.png"
 
 
@@ -108,8 +108,8 @@ const navigation = {
         { name: "FAQ", href: "#" },
         { name: "Wholesale", href: "#contact" }
     ],
-    // Social links — each "icon" is a function returning an SVG logo 
-    //just paste this in
+    // ⁡⁣⁣⁢Social links — each "icon" is a function returning an SVG logo ⁡
+    // ⁡⁣⁣⁢just paste this in⁡
     social: [
         {
             name: "Facebook",
@@ -152,17 +152,17 @@ const navigation = {
 
 const currentYear = new Date().getFullYear();
 
-// leaflet map
+// ⁡⁣⁣⁢leaflet map⁡
 
 function LocationMap() {
-    const mapRef = useRef(null);   // call into the div the map draws into.
-    const mapInstance = useRef(null);    // the build map, so we don't call it twice.
+    const mapRef = useRef(null);   // ⁡⁣⁣⁢call into the div the map draws into.⁡
+    const mapInstance = useRef(null);    // ⁡⁣⁣⁢the build map, so we don't call it twice.⁡
 
     useEffect(() => {
-        // Stop if the map already exists or the target isn't ready
-        if (mapInstance.current || !mapInstance.current) return;
+        // ⁡⁣⁣⁢Stop if the map already exists or the target isn't ready⁡
+        if (mapInstance.current || !mapRef.current) return;
 
-        // Where the map centers
+        // ⁡⁣⁣⁢Where the map centers⁡
         const lat = 39.7386;
         const lng = -104.3256;
 
@@ -173,8 +173,9 @@ function LocationMap() {
             zoomControl: true,
             attributionControl: true,
         });
+        mapInstance.current = map;
 
-        // Use a warm-toned tile layer
+        // ⁡⁣⁣⁢Use a warm-toned tile layer⁡
 
         L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
             attribution:
@@ -183,7 +184,7 @@ function LocationMap() {
             maxZoom: 19
 
         }).addTo(map);
-        // Custom marker
+        // ⁡⁣⁣⁢Custom marker⁡
 
         const icon = L.divIcon({
             className: "leaflet-map-pin",
@@ -200,7 +201,7 @@ function LocationMap() {
             popupAnchor: [0, -38]
         });
 
-        // Place the marker and attach a click-to-open popup with the address
+        // ⁡⁣⁣⁢Place the marker and attach a click-to-open popup with the address⁡
         L.marker([lat, lng], { icon })
             .addTo(map)
             .bindPopup(
@@ -213,15 +214,103 @@ function LocationMap() {
 </div>`
             );
 
-            // Cleanup on unmount, so the map doesn't leak
+            // ⁡⁣⁣⁢Cleanup on unmount, so the map doesn't leak⁡
 
             return () => {
                 map.remove();
                 mapInstance.current = null;
             };
-    }, []);// [] runs once, after mount.
+    }, []);// ⁡⁣⁣⁢[] runs once, after mount.⁡
 
     return (
         <div ref={mapRef} className="footer-map" style={{ width: "100%", overflow: "hidden" }} />
+    );
+};
+
+
+export default function FooterSection() {
+
+    return (
+        <footer className="footer">
+            <div className="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32 2xl:max-w-400">
+                {/* ⁡⁣⁣⁢Map -- ScrollReveal fades it up into view⁡ */}
+                <ScrollReveal animation="fade-up">
+                    <LocationMap />
+                </ScrollReveal>
+
+                <div className="mt-16 grid grid-cols-2 gap-8 md:grid-cols-4">
+                    {/* ⁡⁣⁣⁢Logo⁡ */}
+                    <ScrollReveal animation="fadeUp" className="col-span-2 space-y-4 md:col-span-1">
+                        <img 
+                            alt="The Beans Place Logo"
+                            src={logo}
+                            className="h-24 w-auto place-self-center md:place-self-auto"
+                        />
+                        <p className="footer-description justify-self-center text-center md:justify-self-auto md:text-left">
+                            Premium coffee beans, roasted to order and
+                            shipped freshed. From our roastery to
+                            your cup since 2012.
+                        </p>
+                        <div className="flex gap-x-6 justify-self-center md:justify-self-auto">
+                            {navigation.social.map((item) => (
+                                <a
+                                    key={item.name}
+                                    href={item.href}
+                                    className="text-white/70 transition-colors hover:text-(--amber) duration-200"
+                                    aria-label={item.name}
+                                >
+                                <item.icon aria-hidden="true"className="size-6"/>
+                                </a>
+                            ))}
+                        </div>
+                    </ScrollReveal>
+
+                    <ScrollReveal animation="fadeUp" delay={0.1}>
+                        <h4 className="footer-col">Shop</h4>
+                        <ul role="list" className="footer-links mt-4">
+                            {navigation.shop.map((item) => (
+                                <li key={item.name}>
+                                    <a href={item.href}
+                                        className="text-white/70 transition-colors hover:text-(--amber) duration-200"
+                                        aria-label={item.name}>{item.name}</a>
+                                </li>
+                            ))}
+                        </ul>
+                    </ScrollReveal>
+
+                    <ScrollReveal animation="fadeUp" delay={0.2}>
+                        <h4 className="footer-col">Company</h4>
+                        <ul role="list" className="footer-links mt-4">
+                            {navigation.company.map((item) => (
+                                <li key={item.name}>
+                                    <a href={item.href}
+                                        className="text-white/70 transition-colors hover:text-(--amber) duration-200"
+                                        aria-label={item.name}>{item.name}</a>
+                                </li>
+                            ))}
+                        </ul>
+                    </ScrollReveal>
+
+                    <ScrollReveal animation="fadeUp" delay={0.3}>
+                        <h4 className="footer-col">Support</h4>
+                        <ul role="list" className="footer-links mt-4">
+                            {navigation.support.map((item) => (
+                                <li key={item.name}>
+                                    <a href={item.href}
+                                        className="text-white/70 transition-colors hover:text-(--amber) duration-200"
+                                        aria-label={item.name}>{item.name}</a>
+                                </li>
+                            ))}
+                        </ul>
+                    </ScrollReveal>
+                </div>
+
+                <Separator className="mt-16" />
+
+                <div className="footer-bottom">
+                <p>&copy; {currentYear} The Beans Place, LLC. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
     );
 };

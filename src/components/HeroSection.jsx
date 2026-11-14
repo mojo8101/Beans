@@ -85,19 +85,19 @@
 /* --- YOUR COMPONENT CODE GOES HERE --- */
 
 
-// Imports --> named, default
+// ⁡⁣⁣⁢Imports --> named, default ⁡
 
-// eslint-disable-next-line no-unused-vars
+// ⁡⁣⁣⁢eslint-disable-next-line no-unused-vars⁡
 import {motion, useScroll, useTransform} from "framer-motion";
 
-// Default  
+// ⁡⁣⁣⁢Default  ⁡
 import heroBeans from "../assets/hero-beans.png";
-// Import  other components
+// ⁡⁣⁣⁢Import  other components⁡
 import Button from "./ui/Button";
 import Badge from "./ui/Badge";
 
-// Words will appear 0.12 seconds after each other 
-// State
+// ⁡⁣⁣⁢Words will appear 0.12 seconds after each other⁡ 
+// ⁡⁣⁣⁢State⁡
 const textVariants = {
     hidden: {},
     visible: {transition: {staggerChildren: 0.12}}
@@ -105,7 +105,7 @@ const textVariants = {
 
 
 
-// State
+// ⁡⁣⁣⁢State⁡
 const wordVariant = {
     hidden: {opacity: 0, y: 60, rotateX: -40},
     visible: {
@@ -120,12 +120,12 @@ const wordVariant = {
 
 
 export default function HeroSection(){
-    // Still can write JS
+    // ⁡⁣⁣⁢Still can write JS⁡
 
-    // Create a live value to track how far the page has scrolled
+    // ⁡⁣⁣⁢Create a live value to track how far the page has scrolled⁡
     const {scrollY} = useScroll();
 
-    // Change values to our image as the user scrolls
+    // ⁡⁣⁣⁢Change values to our image as the user scrolls⁡
 
     const imgScale = useTransform(scrollY, [0,600], [1.35, 0.9])
     const imgOpacity = useTransform(scrollY, [0,500], [1, 0])
@@ -135,10 +135,10 @@ export default function HeroSection(){
 
     return (
 
-        // <> </> - fragment - groups elements without an extra wrapper tag
+        // ⁡⁣⁣⁢<> </> - fragment - groups elements without an extra wrapper tag⁡
 
         <>
-          {/* This is a comment node */}
+          {/*⁡⁣⁣⁢ This is a comment node⁡ */}
           <div id="home" className="hero-text-column">
             <motion.div
                 initial={{opacity: 0, y: 20}}
@@ -175,8 +175,8 @@ export default function HeroSection(){
                 </motion.span>
                 </motion.h1>
 
-            {/* Paragraph 
-            - Delayed so it lands after the headline */}
+            {/* ⁡⁢⁢⁢⁡⁣⁣⁢Paragraph 
+            - Delayed so it lands after the headline⁡⁡⁡ */}
             <motion.p
                className="lead"
                style={{marginTop: 18}}
@@ -188,8 +188,8 @@ export default function HeroSection(){
                 roasted in small batches and shipped to your door within 48hrs.
                 </motion.p>          
 
-                {/* Buttons - each scrolls smoothly to a section by id. ?. avoids an error if
-                that section isn't on the page */}
+                {/* ⁡⁣⁣⁢Buttons - each scrolls smoothly to a section by id. ?. avoids an error if
+                that section isn't on the page⁡ */}
 
                 <motion.div
                 className="hero-actions"
@@ -218,7 +218,7 @@ export default function HeroSection(){
                     </Button>
                 </motion.div>
 
-                {/* Trust indicators - appears last, after the buttons */}
+                {/* ⁡⁣⁣⁢Trust indicators - appears last, after the buttons⁡ */}
                 <motion.div
                 className="hero-trust"
                 initial={{opacity: 0, y: 20}}
@@ -232,10 +232,9 @@ export default function HeroSection(){
           </div>
 
         <div className="herp-art-container">
-            {/* initial/animate - the one-time entrance on the page load
-            style - shrink, fade, drift
+            {/* ⁡⁣⁣⁢initial/animate - the one-time entrance on the page load
+            style - shrink, fade, drift⁡
              */}
-
              <motion.img
              className="hero-art"
              src={heroBeans}

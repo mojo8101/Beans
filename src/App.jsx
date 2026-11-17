@@ -56,25 +56,24 @@
 /* --- YOUR COMPONENT CODE GOES HERE --- */
 import HeroSection from "./components/HeroSection";
 import FooterSection from "./components/FooterSection";
-
-
+import FeaturesSection from "./components/FeaturesSection";
 
 export default function App() {
+    return (
+        <div className="app">
+            <section className="hero bg-hero">
+                <div className="hero-grid">
+                    <HeroSection />
+                </div>
+            </section>
 
-return (
-    <div className="app">
+            <section className="features bg-features" id="shop">
+                <FeaturesSection />
+            </section>
 
-
-
-        <section className="hero bg-hero">
-            <div className="hero-grid">
-                <HeroSection/>
-            </div>
-        </section>
-
-        <FooterSection />
-
-    </div>
-
-)
+            <section className="bg-footer">
+                <FooterSection />
+            </section>
+        </div>
+    );
 }

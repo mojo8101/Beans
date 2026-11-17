@@ -231,7 +231,7 @@ export default function HeroSection(){
                 </motion.div>
           </div>
 
-        <div className="herp-art-container">
+        <div className="hero-art-container">
             {/* ⁡⁣⁣⁢initial/animate - the one-time entrance on the page load
             style - shrink, fade, drift⁡
              */}

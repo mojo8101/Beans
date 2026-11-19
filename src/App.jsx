@@ -59,29 +59,36 @@ import FooterSection from "./components/FooterSection";
 import FeaturesSection from "./components/FeaturesSection";
 import CtaSection from "./components/CtaSection";
 import AboutSection from "./components/AboutSection";
-
+import NavBar from "./components/NavBar";
 
 
 export default function App() {
     return (
         <div className="app">
+            <NavBar />
+
+
             <section className="hero bg-hero">
                 <div className="hero-grid">
                     <HeroSection />
                 </div>
             </section>
 
+
             <section className="features bg-features" id="shop">
                 <FeaturesSection />
             </section>
+
 
             <section className="bg-cta">
                 <CtaSection/>
             </section>
 
+
             <section className="bg-cta" id="about">
                 <AboutSection/>
             </section>
+
 
             <section className="bg-footer">
                 <FooterSection />

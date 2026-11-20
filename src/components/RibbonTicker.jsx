@@ -66,3 +66,57 @@
 // Look for the @keyframes ribbon-scroll rule.
 
 /* --- YOUR COMPONENT CODE GOES HERE --- */
+// ⁡⁣⁣⁢RibbonTicker — the marquee strip of blend names. The sideways scroll itself⁡
+// ⁡⁣⁣⁢lives in CSS (.ribbon-track); this file supplies the text and hover effect.⁡
+// ⁡⁣⁣⁢eslint-disable-next-line no-unused-vars -- used only in JSX (<motion.span>)⁡
+import { motion } from "framer-motion";
+export default function RibbonTicker() {
+    const blends = [
+        "Jamaican Blue Mountain",
+        "Yirgacheffe",
+        "Tanzania Peaberry",
+        "Panama Geisha",
+        "Vietnamese Robusta",
+        "Brazilian Santos",
+        "Costa Rica Tarrazu",
+        "Guatemala Antigua",
+        "Kenya AA",
+        "Sumatra Mandheling",
+        "Kona",
+        "Colombian Supremo",
+        "Ethiopian Harrar",
+        "Arabian Mocha",
+        "Red Sulawesi"
+    ];
+    // ⁡⁣⁣⁢"..." (spread) copies the array's items, so this lists the blends twice.⁡
+    // ⁡⁣⁣⁢The CSS scrolls left by exactly half the width and snaps back — with an⁡
+    // ⁡⁣⁣⁢identical second half, the reset is invisible and the loop looks endless.⁡
+    const items = [...blends, ...blends];
+    return (
+        // ⁡⁣⁣⁢Outer container — CSS clips whatever scrolls past the edges⁡
+<div className="ribbon-ticker-container">
+<div className="ribbon-ticker">
+                {/* ⁡⁣⁣⁢The track is the strip that actually slides sideways⁡ */}
+<div className="ribbon-track">
+                    {console.log("items before map:", items)}
+                    {items.map((name, i) => {
+                        console.log(`map is on item #${i}:`, name);
+                        return (
+<motion.span
+                                // ⁡⁣⁣⁢Index is a safe key here: the list never reorders⁡
+                                key={i}
+                                className="ribbon-item"
+                                // ⁡⁣⁣⁢While hovered: grow to 110% and turn amber⁡
+                                whileHover={{ scale: 1.1, color: "#f0b955" }}
+                                // ⁡⁣⁣⁢Spring = bouncy rather than linear; higher stiffness is snappier⁡
+                                transition={{ type: "spring", stiffness: 300 }}>
+                                {/* Blend name plus a star separator */}
+                                {name} <span className="ribbon-dot">✦</span>
+</motion.span>
+                        );
+                    })}
+</div>
+</div>
+</div>
+    );
+}

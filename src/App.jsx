@@ -62,7 +62,7 @@ import AboutSection from "./components/AboutSection";
 import NavBar from "./components/NavBar";
 import RibbonTicker from "./components/RibbonTicker";
 import ProductShowcase from "./components/ProductShowcase";
-
+import ContactSection from "./components/ContactSection";
 
 export default function App() {
     return (
@@ -97,6 +97,9 @@ export default function App() {
                 <AboutSection/>
             </section>
 
+            <section className="bg-cta"id="contact">
+                <ContactSection />
+            </section>
 
             <section className="bg-footer">
                 <FooterSection />
